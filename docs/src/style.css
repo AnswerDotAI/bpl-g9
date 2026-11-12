@@ -5,6 +5,7 @@ header { max-width: 1460px; margin: auto; padding: 26px 32px 22px; display: flex
 h1 { margin: 0; font-size: 30px; letter-spacing: -1px; }
 h1 span { font-weight: 400; color: #627386; }
 header p { margin: 2px 0 0; color: #627386; }
+.header-links { display: flex; align-items: center; justify-content: end; flex-wrap: wrap; gap: 10px 22px; }
 a { color: #24767a; text-decoration: none; }
 main { max-width: 1460px; margin: auto; padding: 0 32px 40px; display: grid; grid-template-columns: 190px minmax(0,1fr); gap: 24px; }
 nav { display: flex; flex-direction: column; gap: 5px; align-self: start; position: sticky; top: 12px; }
@@ -34,7 +35,7 @@ pre { font: 12px/1.5 ui-monospace,monospace; white-space: pre-wrap; overflow-wra
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 @media (max-width: 850px) {
   header { padding: 18px; align-items: start; }
-  header > a { font-size: 12px; max-width: 120px; }
+  .header-links { flex-direction: column; align-items: end; font-size: 12px; max-width: 140px; }
   main { padding: 0 18px 30px; grid-template-columns: 1fr; gap: 18px; }
   nav { position: static; flex-direction: row; flex-wrap: wrap; gap: 2px; }
   nav button { font-size: 13px; padding: 5px 9px; }

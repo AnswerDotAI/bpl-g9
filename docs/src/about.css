@@ -1,0 +1,22 @@
+@font-face { font-family: SAX2B; src: url('https://cdn.jsdelivr.net/npm/basedpl@0.1.90/browser/SAX2B.woff2') format('woff2'); font-display: swap; }
+.brand { font-size: 30px; font-weight: 700; letter-spacing: -1px; color: #243344; }
+.brand span { font-weight: 400; color: #627386; }
+main.about { display: block; max-width: 960px; padding-top: 18px; font-size: 17px; line-height: 1.7; }
+.about h1 { margin: 0 0 20px; font-size: 34px; line-height: 1.2; }
+.about h2 { margin: 2em 0 .6em; font-size: 25px; line-height: 1.3; }
+.about h3 { margin: 1.7em 0 .5em; font-size: 20px; }
+.about p, .about ul, .about ol { margin: 0 0 1.2em; }
+.about li { margin: .35em 0; }
+.about a { text-decoration: underline; text-underline-offset: .15em; }
+.about code { font: .95em/1.6 SAX2B,monospace; background: #e6eff1; padding: .1em .25em; border-radius: 4px; }
+.about pre { padding: 18px 20px; margin: 1.2em 0 1.6em; background: #fff; border: 1px solid #d7e1e7; border-radius: 10px; overflow-x: auto; white-space: pre; font-size: 17px; }
+.about pre code { padding: 0; background: none; }
+.about blockquote { margin: 1.2em 0; padding: 0 20px; border-left: 3px solid #85bfc3; color: #627386; }
+.about table { width: 100%; margin: 1.5em 0; border-collapse: collapse; }
+.about th, .about td { padding: 9px 12px; border-bottom: 1px solid #d7e1e7; text-align: left; }
+.about img { max-width: 100%; height: auto; }
+@media (max-width: 850px) {
+  main.about { font-size: 16px; }
+  .about h1 { font-size: 28px; }
+  .about pre { padding: 14px; font-size: 15px; }
+}
