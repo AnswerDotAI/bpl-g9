@@ -26,7 +26,7 @@ h2 { margin: 0; font-size: 22px; }
 h3 { margin: 0; font-size: 15px; font-weight: 600; }
 .editor-heading div { display: flex; gap: 8px; }
 #run { background: #216e74; color: white; border-color: #216e74; }
-#source { display: block; width: 100%; min-height: 300px; resize: vertical; border: 1px solid #d7e1e7; border-radius: 8px; padding: 16px; font: 17px/1.6 SAX2B,monospace; color: #173b54; background: #fff; tab-size: 2; }
+#source { display: block; width: 100%; resize: none; overflow: hidden; border: 1px solid #d7e1e7; border-radius: 8px; padding: 16px; font: 17px/1.6 SAX2B,monospace; color: #173b54; background: #fff; tab-size: 2; }
 #bpl-toolbar { margin: 12px 0 7px; }
 details { margin-top: 18px; color: #627386; }
 summary { cursor: pointer; }

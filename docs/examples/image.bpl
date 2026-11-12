@@ -1,3 +1,3 @@
 ⍝ Drag the image to move it.
-data←["x":¯100 "y":¯100]
-render←{image ["./image.svg" ω.x ω.y 200 200]}
+data←["./image.svg" ¯100 ¯100 200 200]
+render←{refs.[[1 2]] affects image ω}

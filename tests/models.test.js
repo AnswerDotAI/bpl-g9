@@ -31,15 +31,16 @@ test('gallery geometry and parameter round trips in BPL/WASM', async () => {
       }
       assert.equal(count, counts[name], `${name}: complete scene`);
       if (name === 'basic') assert.deepEqual(values(scene[0].geometry), [10, 0, 0, 10]);
+      if (name === 'image') assert.deepEqual(codec.affects(scene[0].options.affects), ['v0', 'v1']);
       if (name === 'circle') {
-        const [x, y, r] = values(scene.find(s => s.kind === 'circle').geometry), p = values(initial.p);
+        const [x, y, r] = values(scene.find(s => s.kind === 'circle').geometry), p = values(initial);
         for (let i = 0; i < p.length; i += 2) assert.ok(Math.abs(Math.hypot(p[i] - x, p[i + 1] - y) - r) < 1e-9);
       }
       if (name === 'affects') {
         const selected = codec.affects(scene[2].options.affects), flat = codec.flatten(initial);
         selected.forEach(key => flat[key] += 10);
-        assert.deepEqual(values(codec.restore(flat).ends), [-100, -50, 100, -50, -100, 0, 100, 0, -90, 50, 100, 60]);
-        assert.deepEqual(codec.restore(flat).ends.shape, [3, 4]);
+        assert.deepEqual(values(codec.restore(flat)), [-100, -50, 100, -50, -100, 0, 100, 0, -90, 50, 100, 60]);
+        assert.deepEqual(codec.restore(flat).shape, [3, 4]);
       }
       if (model.hasTick) {
         const next = model.tick(initial);

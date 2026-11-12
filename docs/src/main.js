@@ -19,6 +19,13 @@ const examples = [
   ['crank', 'Crank and piston', 'A single parameter drives the linked mechanism.'],
 ];
 const $ = selector => document.querySelector(selector);
+const sourceInput = $('#source');
+function resizeSource() {
+  sourceInput.style.height = 'auto';
+  sourceInput.style.height = `${sourceInput.scrollHeight + sourceInput.offsetHeight - sourceInput.clientHeight}px`;
+}
+sourceInput.addEventListener('input', resizeSource);
+window.addEventListener('resize', resizeSource);
 let controller, current, request = 0, selection = 0;
 const showState = data => { $('#state').textContent = JSON.stringify(data, (_, x) => ArrayBuffer.isView(x) ? Array.from(x) : x, 2); };
 const showError = error => {
@@ -68,7 +75,8 @@ async function select(id) {
     if (!response.ok) throw new Error(`Could not load ${current}`);
     const source = await response.text();
     if (revision !== selection) return;
-    $('#source').value = source;
+    sourceInput.value = source;
+    resizeSource();
     return run(source);
   } catch (error) { if (revision === selection) showError(error); }
 }
@@ -93,4 +101,5 @@ $('#source').addEventListener('keydown', event => {
 window.addEventListener('beforeunload', () => controller?.dispose());
 window.bplG9Gallery = {examples, select, run, get controller() { return controller; }};
 install();
+document.fonts.ready.then(resizeSource);
 select(location.hash.slice(1));
