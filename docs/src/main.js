@@ -2,7 +2,7 @@ import {createBplG9} from './binding.js';
 import {install} from 'basedpl/browser/bpl-editor.js';
 
 const examples = [
-  ['basic', 'Mirrored points', 'Two points share the same two parameters. Drag either one.'],
+  ['basic', 'Mirrored points', 'Two points share the same two parameters. Drag either one. Scroll down for the code (just 2 lines!)'],
   ['rings', 'Counter-rotating rings', 'Change the radius and angle by dragging any point.'],
   ['affects', 'Choosing what moves', 'Three lines demonstrate the affects option.'],
   ['bezier', 'Bézier curve', 'Control points define the curve; its construction changes the interpolation parameter.'],

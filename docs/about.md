@@ -86,7 +86,7 @@ styles lines¨ ↓segments
 `affects` restricts which parameters a shape can change. A parameter name selects that whole field; a vector of names selects several fields. It applies to a group through the same attribute mechanism:
 
 ```bpl
-"t" affects [text [label;x;y]; lines chords; path curve]
+"t" affects [text [label x y]; lines chords; path curve]
 ```
 
 For selected rows or coordinates, use `refs`, a record mirroring the numeric entries of `data`. Its values are parameter references, not coordinates. Ordinary BPL indexing selects them. The same index array can select both the references and the geometry:
@@ -98,7 +98,7 @@ render←{
 }
 ```
 
-This draws handles for rows 2 and 0. Every shape in the group receives the union of the selected references; `affects` does not pair reference rows with geometry rows. Here each point depends on its own row. [Choosing what moves](examples/affects.bpl) uses Each over shared row indices when individual shapes need different selections.
+This draws handles for rows 2 and 0. Every shape in the group receives the union of the selected references; `affects` does not pair reference rows with geometry rows. Here each point depends on its own row. [Choosing what moves](index.html#affects) uses Each over shared row indices when individual shapes need different selections.
 
 `refs.p₀ ₁` selects one coordinate; `refs.p.[:;0]` selects every x coordinate. Arrays of references work with normal BPL broadcasting, Rank and Each. An empty selection allows no parameter changes. Without `affects`, g9 can change every numeric parameter.
 
