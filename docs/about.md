@@ -18,18 +18,18 @@ Select an example, drag its shapes, or edit its BPL and press Run changes. Clock
 
 ## A model in two lines
 
-Each model defines a parameter record, `data`, and a function, `render`, that returns drawing instructions:
+Each model defines its parameters, `data`, and a function, `render`, that returns drawing instructions:
 
 ```bpl
-data←["x":10 "y":0]
-render←points [["x" "y"◇"y" "x"]]⌷
+data←10 0
+render←points ⊢,₁⌽
 ```
 
-`⌷` selects the fields in the arrangement shown by the key matrix. The first row is `x y`, the second `y x`. `points` draws one point for each row. Dragging either point changes `x` and `y`, and both points are drawn again from those values. The model needs no drag handler or inverse formula.
+`⌽` reverses the coordinates, and `⊢,₁⌽` joins the original and reversed vectors as columns: `[10 0◇0 10]`. `points` draws one point for each row. Dragging either point changes the two coordinates, and both points are drawn again from those values. The model needs no drag handler or inverse formula.
 
 ## Why BPL fits
 
-BPL is an array programming language descended from APL, with ideas from J and BQN. Arithmetic works on whole vectors and matrices. Functions combine into short expressions, and operators apply them across array cells. Within a braced function, `ω` names its argument. For `render`, this is the current parameter record.
+BPL is an array programming language descended from APL, with ideas from J and BQN. Arithmetic works on whole vectors and matrices. Functions combine into short expressions, and operators apply them across array cells. Within a braced function, `ω` names its argument. For `render`, this is the current data.
 
 A point is a row of coordinates. A curve is a matrix of points. In the Bézier example, `a` and `b` contain the endpoints of the grey construction lines, and `r` contains one interpolation weight per row. This formula gives all the points on the curve:
 
@@ -89,20 +89,20 @@ styles lines¨ ↓segments
 "t" affects [text [label x y]; lines chords; path curve]
 ```
 
-For selected rows or coordinates, use `refs`, a record mirroring the numeric entries of `data`. Its values are parameter references, not coordinates. Ordinary BPL indexing selects them. The same index array can select both the references and the geometry:
+For selected rows or coordinates, use `refs`, which mirrors the structure of `data`. Its values are parameter references, not coordinates. Ordinary BPL indexing selects them. With a point matrix as `data`, the same index array can select both the references and the geometry:
 
 ```bpl
 render←{
   i←2 0
-  refs.p.[i] affects points ω.p.[i]
+  refs.[i] affects points ω.[i]
 }
 ```
 
 This draws handles for rows 2 and 0. Every shape in the group receives the union of the selected references; `affects` does not pair reference rows with geometry rows. Here each point depends on its own row. [Choosing what moves](index.html#affects) uses Each over shared row indices when individual shapes need different selections.
 
-`refs.p₀ ₁` selects one coordinate; `refs.p.[:;0]` selects every x coordinate. Arrays of references work with normal BPL broadcasting, Rank and Each. An empty selection allows no parameter changes. Without `affects`, g9 can change every numeric parameter.
+`refs₀ ₁` selects one coordinate; `refs.[:;0]` selects every x coordinate. Arrays of references work with normal BPL broadcasting, Rank and Each. An empty selection allows no parameter changes. Without `affects`, g9 can change every numeric parameter.
 
-Coordinates are centred in the drawing area, with positive y pointing down. `view.width` and `view.height` give the drawing area's dimensions. Parameter records can contain numeric scalars and arrays, including matrices. Their keys and array dimensions stay fixed while dragging. Bare numbers in BPL are floats, suitable for continuous motion. Whole-valued floats such as `2 0` work as indices with Mathish on or off. These examples disable Mathish comparisons.
+Coordinates are centred in the drawing area, with positive y pointing down. `view.width` and `view.height` give the drawing area's dimensions. Parameters can be numeric scalars or arrays, including matrices, or records containing them. Their keys and array dimensions stay fixed while dragging. Bare numbers in BPL are floats, suitable for continuous motion. Whole-valued floats such as `2 0` work as indices with Mathish on or off. These examples disable Mathish comparisons.
 
 ## Animation
 
